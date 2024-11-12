@@ -18,6 +18,7 @@ public class Controller {
 
     @Value("${visitjeju.api.key}")
     private String apiKey;
+    private final AllBusRepository allBusRepository;
 
     @GetMapping("/spot")
     public ResponseEntity<String> spot() {
@@ -31,6 +32,13 @@ public class Controller {
     @GetMapping("/bus")
     public ResponseEntity<List<Bus>> bus() {
         List<Bus> buses = busRepository.findLatestBusesByPlateNo();
+
+        return ResponseEntity.ok(buses);
+    }
+
+    @GetMapping("/allbus")
+    public ResponseEntity<List<AllBus>> gatAll() {
+        List<AllBus> buses = allBusRepository.findTop50ByOrderByTimestampDesc();
 
         return ResponseEntity.ok(buses);
     }

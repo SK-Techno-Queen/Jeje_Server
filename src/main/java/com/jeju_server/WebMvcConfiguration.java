@@ -16,7 +16,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 				.addMapping("/**")
 				.allowedOrigins("http://localhost:3000") // 프론트엔드 요청 수락
 				.allowedMethods("GET", "POST", "DELETE", "PATCH")
-				.exposedHeaders("token", "username")
-				.allowedHeaders("Authorization", "Content-Type");
+				.exposedHeaders()
+				.allowedHeaders("Content-Type");
 	}
 }
