@@ -30,10 +30,12 @@ public class Controller {
         return ResponseEntity.ok(response.getBody());
     }
     @GetMapping("/bus")
-    public ResponseEntity<List<Bus>> bus() {
-        List<Bus> buses = busRepository.findLatestBusesByPlateNo();
+    public ResponseEntity<?> bus() {
+        List<Bus> buses = busRepository.findTop50ByOrderByTimestampDesc();
+        List<AllBus> allBuses = allBusRepository.findTop50ByOrderByTimestampDesc();
 
-        return ResponseEntity.ok(buses);
+        BusResponse response = new BusResponse(buses, allBuses);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/allbus")
