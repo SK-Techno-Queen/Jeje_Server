@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import lombok.RequiredArgsConstructor;
 
+import java.security.Timestamp;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,7 +36,24 @@ public class Controller {
 //        List<Bus> buses = busRepository.findTop50ByOrderByTimestampDesc();
 //        List<AllBus> allBuses = allBusRepository.findTop50ByOrderByTimestampDesc();
 //        BusResponse response = new BusResponse(buses, allBuses);
-        List<?> response = busRepository.findBusDetails();
+        List<?> results = busRepository.findBusDetails();
+        List<BusDetailsDto> response = results.stream()
+                .map(result -> {
+                    Object[] row = (Object[]) result;
+                    return new BusDetailsDto(
+                            (String) row[0],
+                            (Timestamp) row[1],
+                            (Long) row[2],
+                            (Timestamp) row[3],
+                            (Double) row[4],
+                            (Double) row[5],
+                            (Long) row[6],
+                            (String) row[7],
+                            (String) row[8]
+                    );
+                })
+                .collect(Collectors.toList());
+
         return ResponseEntity.ok(response);
     }
 

@@ -1,22 +1,31 @@
 package com.jeju_server;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.security.Timestamp;
 
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class BusDetailsDto {
-    private String plateNo;           // 차량 번호
-    private String Original;   // 가장 최신 타임스탬프
-    private Long A_id;            // 가장 큰 ID
-    private String Filter; // 검색 테이블의 가장 최신 타임스탬프
-    private Double local_Y;            // Y 좌표
-    private Double local_X;            // X 좌표
-    private Long B_id;                  // ID
-    private String currStationName;   // 현재 정류장 이름
-    private String routeNum;          // 노선 번호
+    private String plateNo;
+    private Timestamp originalTimestamp;
+    private Long aId;
+    private Timestamp searchTimestamp;
+    private Double localY;
+    private Double localX;
+    private Long bId;
+    private String currStationNm;
+    private String routeNum;
+    public BusDetailsDto(String plateNo, Timestamp originalTimestamp, Long aId,
+                         Timestamp searchTimestamp, Double localY, Double localX,
+                         Long bId, String currStationNm, String routeNum) {
+        this.plateNo = plateNo;
+        this.originalTimestamp = originalTimestamp;
+        this.aId = aId;
+        this.searchTimestamp = searchTimestamp;
+        this.localY = localY;
+        this.localX = localX;
+        this.bId = bId;
+        this.currStationNm = currStationNm;
+        this.routeNum = routeNum;
+    }
 }

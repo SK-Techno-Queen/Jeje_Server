@@ -15,31 +15,19 @@ public interface BusRepository extends JpaRepository<Bus, Long> {
     List<Bus> findTop50ByOrderByTimestampDesc();
 
     @Query(value = """
-            SELECT new com.jeju_server.dto.BusDetailsDto(
-                   A.PLATE_NO, 
-                   MAX(A.TIMESTAMP), 
-                   MAX(A.id),
-                   (SELECT MAX(B.TIMESTAMP) 
-                    FROM bus_search_topic B 
-                    WHERE A.PLATE_NO = B.PLATE_NO),
-                   (SELECT B.LOCAL_Y 
-                    FROM bus_produce_topic B 
-                    WHERE MAX(A.id) = B.id),
-                   (SELECT B.LOCAL_X 
-                    FROM bus_produce_topic B 
-                    WHERE MAX(A.id) = B.id),
-                   (SELECT B.id 
-                    FROM bus_produce_topic B 
-                    WHERE MAX(A.id) = B.id),
-                   (SELECT B.CURR_STATION_NM 
-                    FROM bus_produce_topic B 
-                    WHERE MAX(A.id) = B.id),
-                   (SELECT B.ROUTE_NUM 
-                    FROM bus_produce_topic B 
-                    WHERE MAX(A.id) = B.id))
-            FROM bus_produce_topic A
-            WHERE A.timestamp >= NOW() + INTERVAL 9 HOUR - INTERVAL 10 SECOND
-            GROUP BY A.PLATE_NO
-            """, nativeQuery = true)
-    List<BusDetailsDto> findBusDetails();
+        SELECT A.PLATE_NO,\s
+            MAX(A.TIMESTAMP) AS Original,\s
+            MAX(A.id) AS A_Id,
+            MAX(B.TIMESTAMP) AS Filter,
+            B.LOCAL_Y,\s
+            B.LOCAL_X,\s
+            B.id AS B_Id,\s
+            B.CURR_STATION_NM,\s
+            B.ROUTE_NUM
+        FROM bus_produce_topic A
+        LEFT JOIN bus_produce_topic B ON A.id = B.id
+        WHERE A.timestamp >= NOW() + INTERVAL 9 HOUR - INTERVAL 10 SECOND
+        GROUP BY A.PLATE_NO, B.LOCAL_Y, B.LOCAL_X, B.id, B.CURR_STATION_NM, B.ROUTE_NUM;
+    """, nativeQuery = true)
+    List<?> findBusDetails();
 }
