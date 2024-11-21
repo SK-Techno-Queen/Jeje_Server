@@ -47,9 +47,8 @@ public class Controller {
                             (String) row[3],
                             (Double) row[4],
                             (Double) row[5],
-                            (Long) row[6],
-                            (String) row[7],
-                            (String) row[8]
+                            (String) row[6],
+                            (String) row[7]
                     );
                 })
                 .collect(Collectors.toList());
