@@ -42,9 +42,9 @@ public class Controller {
                     Object[] row = (Object[]) result;
                     return new BusDetailsDto(
                             (String) row[0],
-                            (Timestamp) row[1],
+                            (String) row[1],
                             (Long) row[2],
-                            (Timestamp) row[3],
+                            (String) row[3],
                             (Double) row[4],
                             (Double) row[5],
                             (Long) row[6],
