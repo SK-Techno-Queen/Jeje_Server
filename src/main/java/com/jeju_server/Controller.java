@@ -33,9 +33,8 @@ public class Controller {
     public ResponseEntity<?> bus() {
 //        List<Bus> buses = busRepository.findTop50ByOrderByTimestampDesc();
 //        List<AllBus> allBuses = allBusRepository.findTop50ByOrderByTimestampDesc();
-        List<?> response = busRepository.findBusDetails();
-
 //        BusResponse response = new BusResponse(buses, allBuses);
+        List<?> response = busRepository.findBusDetails();
         return ResponseEntity.ok(response);
     }
 
