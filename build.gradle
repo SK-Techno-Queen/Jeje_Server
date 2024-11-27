@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.5'
     id 'io.spring.dependency-management' version '1.1.6'
+    id 'war'
 }
 
 group = 'com'
@@ -32,8 +33,21 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // 내장 Tomcat을 제외하고 외부 Tomcat에서 사용하도록 설정
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+tasks.named('bootWar') {
+    archiveBaseName.set("bus")
+    version = '1.0.0'
+    manifest {
+        attributes(
+                'Implementation-Title': 'bus',
+        )
+    }
 }
