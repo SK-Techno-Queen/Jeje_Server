@@ -21,7 +21,7 @@ public interface BusRepository extends JpaRepository<Bus, Long> {
         (SELECT B.CURR_STATION_NM FROM jeju_produce_topic B WHERE A.id = B.id LIMIT 1) AS CURR_STATION,
         (SELECT B.ROUTE_NUM FROM jeju_produce_topic B WHERE A.id = B.id LIMIT 1) AS ROUTE_NUM
     FROM jeju_produce_topic A
-    WHERE A.TIMESTAMP >= DATE_ADD(NOW(), INTERVAL 9 HOUR) - INTERVAL 10 SECOND
+    WHERE A.TIMESTAMP >= DATE_ADD(NOW(), INTERVAL 9 HOUR) - INTERVAL 2 SECOND
     GROUP BY A.PLATE_NO, A.id;
     """, nativeQuery = true)
     List<?> findBusDetails();
