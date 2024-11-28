@@ -98,6 +98,15 @@ public class Controller {
         return executeRemoteCommand(ip, "/engn/confluent/scripts/start-connect.sh /engn/confluent/properties/connect-worker.properties");
     }
 
+    @GetMapping("/stop/sr/{ip}")
+    public ResponseEntity<?> stopSR(@PathVariable("ip") String ip) {
+        return executeRemoteCommand(ip, "/engn/confluent/scripts/stop-schema-registry.sh");
+    }
+
+    @GetMapping("/start/sr/{ip}")
+    public ResponseEntity<?> startSR(@PathVariable("ip") String ip) {
+        return executeRemoteCommand(ip, "/engn/confluent/scripts/start-schema-registry.sh /engn/confluent/properties/schema-registry.properties");
+    }
 
 
     private ResponseEntity<?> executeRemoteCommand(String ip, String scriptPath) {
