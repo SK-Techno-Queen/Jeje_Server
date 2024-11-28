@@ -27,7 +27,7 @@ public class Controller {
 
     @GetMapping("/spot")
     public ResponseEntity<String> spot() {
-        String url = String.format("https://api.visitjeju.net/vsjApi/contents/searchList?serviceKey=%s&locale=kr&category=c1&page=1", apiKey);
+        String url = String.format("http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=%s&locale=kr&category=c1&page=1", apiKey);
         RestTemplate restTemplate = new RestTemplate();
         try {
             ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
