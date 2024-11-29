@@ -12,11 +12,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry
-				.addMapping("/**")
-				.allowedOrigins("http://localhost:3000", "http://localhost:80") // 프론트엔드 요청 수락
-				.allowedMethods("GET", "POST", "DELETE", "PATCH")
-				.exposedHeaders()
-				.allowedHeaders("Content-Type");
+		registry.addMapping("/**")
+				.allowedOriginPatterns("http://localhost:3000", "http://3.38.199.187:3000")
+				.allowedMethods("GET", "POST", "DELETE", "PUT", "PATCH")
+				.allowedHeaders("*")
+				.allowCredentials(true);
 	}
 }
