@@ -46,12 +46,11 @@ public class Controller {
                     return new BusDetailsDto(
                             (String) row[0],
                             (String) row[1],
-                            (Long) row[2],
-                            (String) row[3],
+                            (String) row[2],
+                            (Double) row[3],
                             (Double) row[4],
-                            (Double) row[5],
-                            (String) row[6],
-                            (String) row[7]
+                            (String) row[5],
+                            (String) row[6]
                     );
                 })
                 .collect(Collectors.toList());

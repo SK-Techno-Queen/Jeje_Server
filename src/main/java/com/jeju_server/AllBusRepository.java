@@ -7,5 +7,4 @@ import java.util.List;
 @Repository
 public interface AllBusRepository extends JpaRepository<AllBus, Long> {
 
-    List<AllBus> findTop50ByOrderByTimestampDesc();
 }
